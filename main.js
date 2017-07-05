@@ -1,5 +1,6 @@
 var EC;
 var saveBtn, loadBtn, inpKey, inpValue, resKey, resValue;
+var loadedRes;
 
 (function(){
 	if(typeof evercookie != 'function'){
@@ -29,7 +30,8 @@ function init(){
 	};
 
 	loadBtn.onclick = function(){
-		resValue.innerHTML = loadCookie(resKey.value);
+		loadCookie(resKey.value);
+		resValue.innerHTML = loadedRes;
 	};	
 }
 
@@ -42,7 +44,6 @@ function loadCookie(key){
 	var res;
 	EC.get(key, function(value){
 		console.log('loaded cookie ' + key + '. Value: ' + value);
-		res = value;
+		loadedRes = value;
 	});
-	return res;
 }
