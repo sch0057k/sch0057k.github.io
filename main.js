@@ -29,7 +29,7 @@ function init(){
 	};
 
 	loadBtn.onclick = function(){
-		loadCookie(resKey.value);
+		resValue.innerHTML = loadCookie(resKey.value);
 	};	
 }
 
