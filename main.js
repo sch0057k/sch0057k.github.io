@@ -31,7 +31,6 @@ function init(){
 
 	loadBtn.onclick = function(){
 		loadCookie(resKey.value);
-		resValue.innerHTML = loadedRes;
 	};	
 }
 
@@ -45,5 +44,6 @@ function loadCookie(key){
 	EC.get(key, function(value){
 		console.log('loaded cookie ' + key + '. Value: ' + value);
 		loadedRes = value;
+		resValue.innerHTML = value;
 	});
 }
