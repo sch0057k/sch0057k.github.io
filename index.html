@@ -1,8 +1,34 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <meta charset="utf-8">
+  <title>Cookie Test</title>
+   <!-- helpers -->
+  <script type="text/javascript" src="lib/jquery.min.js"></script>
+  <script type="text/javascript" src="lib/plugindetect.js"></script>
+  <script type="text/javascript" src="lib/jquery.flash.js"></script>
+  <script type="text/javascript" src="lib/swfobject.min.js"></script>
+  <script type="text/javascript" src="lib/evercookie.js"></script>
+
+
+</head>
 <body>
-<h1>Hello.</h1>
-<p>I bims, dem GitHub Page!</p>
-<p>lel</p>
+	<h1>Evercookie Test</h1>
+
+	<h2>Create new Cookie</h2>
+	<label for="inpKey">Key:</label>
+    <input id="inpKey" type="text">
+    <label for="inpValue">Value:</label>
+    <input id="inpValue" type="text" name="inpValue" >
+    <button id="saveBtn">Save Cookie</button>
+
+    <h2>Load Cookie</h2>
+   	<label for="key">Key:</label>
+    <input id="resKey" type="text">
+    <label for="resValue">Result:</label>
+    <p id="resValue" type="text" name="resValue" >-</p>
+    <button id="loadBtn" class="">Load Cookie</button>
+
+    <script src="main.js"></script>
 </body>
 </html>
