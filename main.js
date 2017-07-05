@@ -39,8 +39,10 @@ function createCookie(key,value){
 }
 
 function loadCookie(key){
+	var res;
 	EC.get(key, function(value){
 		console.log('loaded cookie ' + key + '. Value: ' + value);
-		return value;
+		res = value;
 	});
+	return res;
 }
