@@ -17,11 +17,11 @@ var OPTIONS = {
 	swfFileName: '/evercookie.swf',
 	xapFileName: '/evercookie.xap',
 	jnlpFileName: '/evercookie.jnlp',
-	pngCookieName: 'evercookie_png',
+	pngCookieName: false, //'evercookie_png',
 	pngPath: '/evercookie_png.php',
-	etagCookieName: 'evercookie_etag',
+	etagCookieName: false, //'evercookie_etag',
 	etagPath: '/evercookie_etag.php',
-	cacheCookieName: 'evercookie_cache',
+	cacheCookieName: false, //'evercookie_cache',
 	cachePath: '/evercookie_cache.php',
 	hsts: false,
 	hsts_domains: [],
@@ -51,9 +51,7 @@ function init(){
 }
 
 function getCookie(best_candidate, all_candidates){
-    log("The retrieved cookie is: " + best_candidate + "\n" +
-    	"You can see what each storage mechanism returned " +
-		"by looping through the all_candidates object.");
+    log("The retrieved cookie is: " + best_candidate);
 
     if(best_candidate != 'undefined'){
     	for (var item in all_candidates)
