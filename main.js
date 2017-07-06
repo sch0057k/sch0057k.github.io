@@ -44,22 +44,29 @@ var OPTIONS = {
 function init(){
 	EC = new evercookie(OPTIONS);
 
-	//configure which methods to use
-
-
 	EC.get(COOKIE_KEY, getCookie);		
 }
 
 function getCookie(best_candidate, all_candidates){
     log("The retrieved cookie is: " + best_candidate);
 
-    if(best_candidate != 'undefined'){
-    	for (var item in all_candidates)
-		log("Storage mechanism " + item +
-			" returned: " + all_candidates[item]);	
+    if(best_candidate != 'undefined' && best_candidate != undefined && best_candidate != null){
+    	var table = document.getElementById('table');
+    	for (var item in all_candidates){
+    		var row = table.insertRow(1);
+    		var cell1 = row.insertCell(0);
+    		var cell2 = row.insertCell(1);
+    		cell1.innerHTML = item;
+    		cell2.innerHTML = all_candidates[item];
+    	}
+		/*log("Storage mechanism " + item +
+			" returned: " + all_candidates[item]);	*/
     }else{ //no cookie present create new one
-    	EC.set(COOKIE_KEY,createNewCookieValue);
-    }	
+    	var val = createNewCookieValue();
+    	EC.set(COOKIE_KEY,val);
+    	log('Created new cookie with value: ' + val);
+    }
+    document.getElementById('loading_indicator').style.display = 'none';	
 }
 
 function createNewCookieValue(){
