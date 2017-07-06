@@ -1,6 +1,33 @@
 var EC;
 var saveBtn, loadBtn, inpKey, inpValue, resKey, resValue;
-var loadedRes;
+
+var COOKIE_KEY = 'SOM-EVERCOOKIE-TEST';
+
+var OPTIONS = {
+	history: false, // CSS history knocking or not .. can be network intensive
+	java: true, // Java applet on/off... may prompt users for permission to run.
+	tests: 10,  // 1000 what is it, actually?
+	silverlight: false, // you might want to turn it off https://github.com/samyk/evercookie/issues/45,
+	lso: true, // local storage
+	domain: '.' + window.location.host.replace(/:\d+/, ''), // Get current domain
+	baseurl: '', // base url for php, flash and silverlight assets
+	asseturi: '/assets', // assets = .fla, .jar, etc
+	phpuri: '/php', // php file path or route
+	authPath: false, //'/evercookie_auth.php', // set to false to disable Basic Authentication cache
+	swfFileName: '/evercookie.swf',
+	xapFileName: '/evercookie.xap',
+	jnlpFileName: '/evercookie.jnlp',
+	pngCookieName: 'evercookie_png',
+	pngPath: '/evercookie_png.php',
+	etagCookieName: 'evercookie_etag',
+	etagPath: '/evercookie_etag.php',
+	cacheCookieName: 'evercookie_cache',
+	cachePath: '/evercookie_cache.php',
+	hsts: false,
+	hsts_domains: [],
+	db: true, // Database
+	idb: true // Indexed DB
+};
 
 (function(){
 	if(typeof evercookie != 'function'){
@@ -15,35 +42,39 @@ var loadedRes;
 })();
 
 function init(){
-	EC = new evercookie();
+	EC = new evercookie(OPTIONS);
 
-	saveBtn = document.getElementById('saveBtn');
-	loadBtn = document.getElementById('loadBtn');
+	//configure which methods to use
 
-	inpKey =  document.getElementById('inpKey');
-	inpValue = document.getElementById('inpValue');
-	resKey = document.getElementById('resKey');
-	resValue = document.getElementById('resValue'); 
 
-	saveBtn.onclick = function(){
-		createCookie(inpKey.value, inpValue.value);
-	};
-
-	loadBtn.onclick = function(){
-		loadCookie(resKey.value);
-	};	
+	EC.get(COOKIE_KEY, getCookie);		
 }
 
-function createCookie(key,value){
-	EC.set(key,value);
-	console.log('created cookie ' + key);	
+function getCookie(best_candidate, all_candidates){
+    log("The retrieved cookie is: " + best_candidate + "\n" +
+    	"You can see what each storage mechanism returned " +
+		"by looping through the all_candidates object.");
+
+    if(best_candidate != 'undefined'){
+    	for (var item in all_candidates)
+		log("Storage mechanism " + item +
+			" returned: " + all_candidates[item]);	
+    }else{ //no cookie present create new one
+    	EC.set(COOKIE_KEY,createNewCookieValue);
+    }	
 }
 
-function loadCookie(key){
-	var res;
-	EC.get(key, function(value){
-		console.log('loaded cookie ' + key + '. Value: ' + value);
-		loadedRes = value;
-		resValue.innerHTML = value;
-	});
+function createNewCookieValue(){
+	var val = 'SOM';
+	var now = new Date();
+
+	val = [val, now.getHours()+'h',now.getMinutes()+'m',now.getDate(),now.getMonth()+1,now.getFullYear(),].join('-');
+
+	return val;
+}
+
+
+function log(msg){
+	var l = document.getElementById('log');
+	l.innerHTML += '<p>' + msg + '</p>';
 }

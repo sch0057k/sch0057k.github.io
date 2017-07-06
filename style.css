@@ -1,0 +1,49 @@
+.wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 300px;
+	height: 250px;
+	background-color: black;
+}
+
+#best_candidate {
+	width: 100%;
+}
+
+.wrapper_table {
+	overflow-y: scroll;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 300px;
+	height: 150px;
+	background-color: blue;
+}
+
+#table {
+	width: 100%;
+	font-family: arial, sans-serif;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.wrapper_log {
+	overflow-y: scroll;
+	position: absolute;
+	height: 100px;
+	width: 300px;
+	top: 150px;
+	left: 0;
+	background-color: green;
+}
